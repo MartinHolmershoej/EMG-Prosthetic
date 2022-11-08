@@ -1,11 +1,28 @@
 
 Mode = True
+active = False
 gripGroup = 0
 
 
 def runProsthetic():
-    return None
+    while True:
 
+        #Here we change the mode to simple
+        if Mode and not active:
+            active = True
+
+            #Create objects here etc
+            return None
+
+        #Here we change the mode to advanced
+        elif not Mode and active:
+            active = False
+
+            #Create objects here etc
+            return None
+
+        #call the analyse etc.
+    
 def ChangeGrip():
     gripGroup =+1
 
