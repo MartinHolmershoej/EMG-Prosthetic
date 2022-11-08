@@ -3,7 +3,7 @@ Mode = True
 gripGroup = 0
 
 
-def onBootUp():
+def runProsthetic():
     return None
 
 def ChangeGrip():

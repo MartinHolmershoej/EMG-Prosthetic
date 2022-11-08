@@ -19,7 +19,7 @@ Mode_Button = gpiozero.Button(18)
 Grip_Button = gpiozero.Button() #Remeber to set pin number
 
 
-controllerThread = Thread(target=mainController.onBootUp)
+controllerThread = Thread(target=mainController.runProsthetic)
 controllerThread.start()
 
 while True:
