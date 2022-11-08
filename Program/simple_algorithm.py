@@ -25,8 +25,8 @@ class SimpleAlgorithm(Ialgorithm):
             value1 += queue1.get()
             value2 += queue2.get()
         
-        baseline_1 = (value1/10)
-        baseline_2 = (value2/10)
+        baseline_1 = (value1/10.0)
+        baseline_2 = (value2/10.0)
 
 
         
