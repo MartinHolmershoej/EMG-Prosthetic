@@ -1,6 +1,6 @@
 import Ialgorithm
 
-class SimpleAlgorithm(Ialgorithm):
+class AdvancedAlgorithm(Ialgorithm):
 
     def Analyse():
         result = 0
