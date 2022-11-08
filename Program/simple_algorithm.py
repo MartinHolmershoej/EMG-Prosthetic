@@ -16,8 +16,17 @@ class SimpleAlgorithm(Ialgorithm):
         if (queue2.get()>baseline_2 and queue1.get()<baseline_1):
             return 2
 
-    def Baseline():
-        #set baseline 1
+    def Baseline(queue1, queue2):
+        value1 = 0
+        value2 = 0
 
-        #set baseline 2
-        None
+        #set baseline 1 and 2
+        for x in range(10):
+            value1 += queue1.get()
+            value2 += queue2.get()
+        
+        baseline_1 = (value1/10)
+        baseline_2 = (value2/10)
+
+
+        
