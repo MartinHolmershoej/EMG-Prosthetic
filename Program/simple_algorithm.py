@@ -4,7 +4,7 @@ import Ialgorithm
 baseline_1 = 0.600 #default values
 baseline_2 = 0.600 #default values
 
-class SimpleAlgorithm(Ialgorithm):
+class SimpleAlgorithm(Ialgorithm.ABC):
 
     def Analyse(queue1, queue2):
             
@@ -25,8 +25,8 @@ class SimpleAlgorithm(Ialgorithm):
                 value1 += queue1.get()
                 value2 += queue2.get()
             
-            baseline_1 = (value1/10.0)
-            baseline_2 = (value2/10.0)
+            baseline_1 = round(value1/10.0,2)
+            baseline_2 = round(value2/10.0,2)
 
             return baseline_1, baseline_2
 

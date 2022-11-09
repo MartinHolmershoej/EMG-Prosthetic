@@ -1,6 +1,7 @@
 import unittest
 from multiprocessing import Queue
-import simple_algorithm
+from simple_algorithm import SimpleAlgorithm
+
 
 class TestSimpleAlgorithm(unittest.TestCase):
 
@@ -16,7 +17,7 @@ class TestSimpleAlgorithm(unittest.TestCase):
 
     def test_Baseline(self):
         
-        self.assertEqual(simple_algorithm.Baseline(self.q1,self.q2), (0.65, 0.750))
+        self.assertEqual(SimpleAlgorithm.Baseline(self.q1,self.q2), (0.65, 0.750))
 
 
 if __name__ == '__main__':
