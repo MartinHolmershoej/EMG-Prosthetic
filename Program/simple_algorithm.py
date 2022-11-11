@@ -6,10 +6,6 @@ baseline_2 = 0.600 #default values
  
 
 class SimpleAlgorithm(Ialgorithm.ABC):
-    
-    #Default constructor
-    def __init__(self):
-        print("created: simple")
 
     def Analyse(queueList):
         queue1 = queueList[1]
