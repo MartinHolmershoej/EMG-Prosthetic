@@ -1,5 +1,6 @@
 from simple_factory import SimpleFactory
 from advanced_factory import AdvancedFactory
+from s_EMG_Sensor import sEMGSensor
 from threading import Thread
 import gpiozero
 
@@ -16,6 +17,7 @@ def runProsthetic():
         #Here we change the mode to simple
         if Mode and not active:
             active = True
+            
             powerSensorsOff(sensorList, pinList)
 
             #Create objects here etc
@@ -23,8 +25,9 @@ def runProsthetic():
             Algorithm = factory.create_mode()
             sensorList = factory.create_sensors()
             powerSensorsOn(sensorList, pinList)
-
-            consumerThread = Thread(target=Algorithm.Analyse(), args=()) #maybe take a list if queues instead
+            
+            consumerThread = Thread(target=Algorithm.Analyse, args=()) #maybe take a list if queues instead
+            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList))
             
         #Here we change the mode to advanced
         elif not Mode and active:
@@ -37,8 +40,9 @@ def runProsthetic():
             sensorList = factory.create_sensors()
             powerSensorsOn(sensorList, pinList)
             
-            consumerThread = Thread(target=Algorithm.Analyse(), args=())  #maybe take a list if queues instead
-
+            consumerThread = Thread(target=Algorithm.Analyse, args=())  #maybe take a list if queues instead
+            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList))
+            
         #call the analyse etc.
         result = consumerThread.run()
         
