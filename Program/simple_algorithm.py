@@ -13,8 +13,11 @@ class SimpleAlgorithm(Ialgorithm.ABC):
                 return 1
 
             #lower muscel active
-            if (queue2.get()>baseline_2 and queue1.get()<baseline_1):
+            elif (queue2.get()>baseline_2 and queue1.get()<baseline_1):
                 return 2
+            
+            else:
+                return 0
 
     def Baseline(queue1, queue2):
             value1 = 0
