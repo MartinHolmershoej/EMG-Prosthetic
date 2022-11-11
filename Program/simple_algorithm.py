@@ -8,15 +8,17 @@ baseline_2 = 0.600 #default values
 class SimpleAlgorithm(Ialgorithm.ABC):
 
     def Analyse(queueList):
-        queue1 = queueList[1]
-        queue2 = queueList[2]
+        queue1 = queueList[0]
+        queue2 = queueList[1]
+        queue1Value = queue1.get()
+        queue2Value = queue2.get()
         
         #upper muscel active
-        if (queue1.get()> baseline_1 and queue2.get()<baseline_2):
+        if (queue1Value > baseline_1 and queue2Value < baseline_2):
              return 1
 
         #lower muscel active
-        elif (queue2.get()>baseline_2 and queue1.get()<baseline_1):
+        elif (queue2Value > baseline_2 and queue1Value < baseline_1):
             return 2
             
         else:
