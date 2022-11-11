@@ -1,23 +1,29 @@
 import unittest
 from multiprocessing import Queue
-from simple_algorithm import SimpleAlgorithm
+import simple_algorithm 
 
 
 class TestSimpleAlgorithm(unittest.TestCase):
-
+    
     def setUp(self):
-        self.q1 = Queue(maxsize=0,)
-        self.q2 = Queue(maxsize=0,)
-        
+        self.queueList = []
+        self.q1 = Queue(maxsize=0)
+        self.q2 = Queue(maxsize=0)
+
         for x in range(10):
             self.q1.put(0.600)
             self.q2.put(0.700)
             self.q1.put(0.700)
             self.q2.put(0.800)
+        
+        self.queueList = [self.q1, self.q2]
+
+
 
     def test_Baseline(self):
         
-        self.assertEqual(SimpleAlgorithm.Baseline(self.q1,self.q2), (0.65, 0.750))
+        simple_algorithm.SimpleAlgorithm.Baseline(self.queueList)
+        self.assertEqual(simple_algorithm.baseline_1, simple_algorithm.baseline_2, (0.65, 0.750))
 
 
 if __name__ == '__main__':

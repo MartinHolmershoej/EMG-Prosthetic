@@ -25,8 +25,8 @@ class SimpleAlgorithm(Ialgorithm.ABC):
     def Baseline(queueList):
         value1 = 0
         value2 = 0
-        queue1 = queueList[1]
-        queue2 = queueList[2]
+        queue1 = queueList[0]
+        queue2 = queueList[1]
         
         #set baseline 1 and 2
         for x in range(10):
@@ -36,4 +36,5 @@ class SimpleAlgorithm(Ialgorithm.ABC):
         baseline_1 = round(value1/10.0,2)
         baseline_2 = round(value2/10.0,2)
         
+    
         
