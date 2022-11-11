@@ -1,8 +1,10 @@
+from simple_factory import SimpleFactory
+from advanced_factory import AdvancedFactory
 
 Mode = True
 active = False
 gripGroup = 0
-
+factory = None
 
 def runProsthetic():
     while True:
@@ -12,15 +14,19 @@ def runProsthetic():
             active = True
 
             #Create objects here etc
-            return None
-
+            factory = SimpleFactory
+            factory.create_mode()
+            factory.create_sensors
+            
         #Here we change the mode to advanced
         elif not Mode and active:
             active = False
 
             #Create objects here etc
-            return None
-
+            factory = AdvancedFactory
+            factory.create_mode()
+            factory.create_sensors
+            
         #call the analyse etc.
     
 def ChangeGrip():
