@@ -89,3 +89,4 @@ def ChangeGrip():
 
         case _:
             print("grip 1")
+            gripGroup = 1
