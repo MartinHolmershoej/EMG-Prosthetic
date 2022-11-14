@@ -2,6 +2,6 @@ import Ialgorithm
 
 class AdvancedAlgorithm(Ialgorithm):
 
-    def Analyse():
+    def Analyse(queueList):
         result = 0
         return result
