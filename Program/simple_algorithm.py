@@ -7,7 +7,7 @@ baseline_2 = 0.600 #default values
 
 class SimpleAlgorithm(Ialgorithm.ABC):
 
-    def Analyse(queueList):
+    def Analyse(queueList, gripGroup):
         queue1 = queueList[0]
         queue2 = queueList[1]
         queue1Value = queue1.get()
@@ -15,11 +15,25 @@ class SimpleAlgorithm(Ialgorithm.ABC):
         
         #upper muscel active
         if (queue1Value > baseline_1 and queue2Value < baseline_2):
-             return 1
+            if gripGroup == 1:
+                return 1
+
+            elif gripGroup == 2:
+                return 3
+            
+            elif gripGroup == 3:
+                return 5
 
         #lower muscel active
         elif (queue2Value > baseline_2 and queue1Value < baseline_1):
-            return 2
+            if gripGroup == 1:
+                return 2
+
+            elif gripGroup == 2:
+                return 4
+            
+            elif gripGroup == 3:
+                return 6
             
         else:
             return 0
