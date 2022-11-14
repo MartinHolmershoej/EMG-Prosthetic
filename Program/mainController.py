@@ -34,7 +34,7 @@ def runProsthetic():
             
             consumerThread = Thread(target=Algorithm.Baseline, args=(queueList)) 
             consumerThread.run()
-            consumerThread = Thread(target=Algorithm.Analyse, args=(queueList)) 
+            consumerThread = Thread(target=Algorithm.Analyse, args=(queueList, gripGroup)) 
                         
         #Here we change the mode to advanced
         elif not Mode and active:
