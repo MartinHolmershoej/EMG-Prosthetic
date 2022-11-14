@@ -2,7 +2,6 @@ import unittest
 from multiprocessing import Queue
 import simple_algorithm 
 
-
 class TestSimpleAlgorithm(unittest.TestCase):
     
     #help function for filling up the queue
@@ -37,24 +36,47 @@ class TestSimpleAlgorithm(unittest.TestCase):
         self.assertEqual(simple_algorithm.baseline_1, simple_algorithm.baseline_2, (0.65, 0.750))
 
 
-    def test_Analyse_return1(self):
+    def test_Analyse_Upper_gripGroup_1(self):
+        gripGroup = 1
         self.fillQueueForAnalyse(0.700, 0.500)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),1)
-     
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),1)
+    
+    def test_Analyse_Upper_gripGroup_2(self):
+        gripGroup = 2
+        self.fillQueueForAnalyse(0.700, 0.500)
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),3)
+    
+    def test_Analyse_Upper_gripGroup_3(self):
+        gripGroup = 3
+        self.fillQueueForAnalyse(0.700, 0.500)
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),5) 
         
-    def test_Analyse_return2(self):
+    def test_Analyse_Lower_gripGroup_1(self):
+        gripGroup = 1
         self.fillQueueForAnalyse(0.500, 0.800)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),2)
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),2)
+    
+    def test_Analyse_Lower_gripGroup_2(self):
+        gripGroup = 2
+        self.fillQueueForAnalyse(0.500, 0.800)
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),4)
+    
+    def test_Analyse_Lower_gripGroup_3(self):
+        gripGroup = 3
+        self.fillQueueForAnalyse(0.500, 0.800)
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),6)
 
         
     def test_Analyse_return0_value1_True(self):
+        gripGroup = 1
         self.fillQueueForAnalyse(0.700, 0.800)        
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),0)
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),0)
     
     
     def test_Analyse_return0_value2_True(self):
+        gripGroup = 1
         self.fillQueueForAnalyse(0.700, 0.800)        
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),0)
+        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),0)
         
     
     
