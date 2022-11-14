@@ -29,7 +29,7 @@ def runProsthetic():
             queueList = factory.create_queues()
             powerSensorsOn(sensorList, pinList)
             
-            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList))
+            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList, queueList))
             producerThread.start()
             
             consumerThread = Thread(target=Algorithm.Baseline, args=(queueList)) 
@@ -46,10 +46,13 @@ def runProsthetic():
             factory = AdvancedFactory
             Algorithm = factory.create_mode()
             sensorList = factory.create_sensors()
+            queueList = factory.create_queues()
             powerSensorsOn(sensorList, pinList)
             
-            consumerThread = Thread(target=Algorithm.Analyse, args=())  #maybe take a list if queues instead
-            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList))
+            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList, queueList))
+            producerThread.start()
+                        
+            consumerThread = Thread(target=Algorithm.Analyse, args=(queueList))
             
         #call the analyse etc.
         result = consumerThread.run()

@@ -5,6 +5,7 @@ import simple_algorithm
 
 class TestSimpleAlgorithm(unittest.TestCase):
     
+    #help function for filling up the queue
     def fillQueueForAnalyse(self, value1, value2):
         self.queueList = []
         self.q1 = Queue(maxsize=0)
@@ -14,7 +15,8 @@ class TestSimpleAlgorithm(unittest.TestCase):
         self.q2.put(value2)
         
         self.queueList = [self.q1, self.q2]
-
+    
+    #help function for filling up the queue
     def fillQueueForBaseline(self):
         self.queueList = []
         self.q1 = Queue(maxsize=0)
@@ -30,29 +32,27 @@ class TestSimpleAlgorithm(unittest.TestCase):
 
 
     def test_Baseline(self):
-        
         self.fillQueueForBaseline()
         simple_algorithm.SimpleAlgorithm.Baseline(self.queueList)
         self.assertEqual(simple_algorithm.baseline_1, simple_algorithm.baseline_2, (0.65, 0.750))
 
-    def test_Analyse_return1(self):
 
+    def test_Analyse_return1(self):
         self.fillQueueForAnalyse(0.700, 0.500)
         self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),1)
+     
         
     def test_Analyse_return2(self):
-
         self.fillQueueForAnalyse(0.500, 0.800)
         self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),2)
 
         
     def test_Analyse_return0_value1_True(self):
-
         self.fillQueueForAnalyse(0.700, 0.800)        
         self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),0)
     
+    
     def test_Analyse_return0_value2_True(self):
-
         self.fillQueueForAnalyse(0.700, 0.800)        
         self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList),0)
         

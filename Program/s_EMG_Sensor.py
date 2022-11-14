@@ -4,9 +4,12 @@ Stop_Thread = False
 
 class sEMGSensor():
 
-    def getData(queue, sensor):
+    def getData(sensorList, queueList):
         while True:
-            i = sensor.voltage
-            queue.put(i)
-            if Stop_Thread:
-                break
+            for i in range(len(sensorList)):
+                queue = queueList[i]
+                sensor = sensorList[i]
+                queue.put(sensor.voltage)
+                
+                if Stop_Thread:
+                    break
