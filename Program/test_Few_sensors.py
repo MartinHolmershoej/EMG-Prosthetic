@@ -1,7 +1,7 @@
 import unittest
 import few_sensors
 
-#can only be tested on the RPi, because for some imports
+#can only be tested on the RPi, because of some of the imports
 class TestFewSensors(unittest.TestCase):
     
     def test_createSensors(self):
