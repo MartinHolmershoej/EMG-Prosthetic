@@ -12,6 +12,7 @@ class SimpleFactory(AbstractFactory):
         sensorList = few_sensors.createList()
         return sensorList
     
+    #Overwrites the abstract method, to create many queues
     def create_queues(self):
         queueList = few_queues.createQueues()
         return queueList
