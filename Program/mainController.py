@@ -1,15 +1,17 @@
 from simple_factory import SimpleFactory
 from advanced_factory import AdvancedFactory
 from s_EMG_Sensor import sEMGSensor
+from motorController import MotorController
 from threading import Thread
 import gpiozero
 
 Mode = True
 active = False
-gripGroup = 0
+gripGroup = 1
+result = 0
 sensorList = []
 pinList = [1,2,3] #Change to correct pin numbers
-motorThread = Thread #thread for controlling the motors
+motorThread = Thread(target=MotorController.MoveHand, args=(result))
 
 
 #--------------REMBER TO JOIN THE THREAD--------------#
@@ -39,6 +41,7 @@ def runProsthetic():
         #Here we change the mode to advanced
         elif not Mode and active:
             active = False
+            gripGroup = 1
             producerThread.join()
             powerSensorsOff(sensorList, pinList)
 
@@ -58,6 +61,7 @@ def runProsthetic():
         result = consumerThread.run()
         
         #call motor thread with result as parameter
+        motorThread.run(result, gripGroup)
 
 def powerSensorsOn(sensorList, pinList):
     
