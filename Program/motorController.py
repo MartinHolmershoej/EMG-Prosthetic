@@ -4,7 +4,7 @@ import gpiozero
 
 #-----------Grip Numbers-----------#
 
-# open = 0 - default
+# open = 0 - default open hand/paper
 
 # fist/rock = 1
 # pinch = 2
