@@ -61,7 +61,7 @@ def runProsthetic():
         result = consumerThread.run()
         
         #call motor thread with result as parameter
-        motorThread.run(result, gripGroup)
+        motorThread.run(result)
 
 def powerSensorsOn(sensorList, pinList):
     
