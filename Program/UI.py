@@ -8,19 +8,21 @@ lastModeRequest = datetime.datetime.now()
 lastGripRequest = datetime.datetime.now()
 
 
-Power_Led = gpiozero.LED(4)
-Mode_Led1 = gpiozero.LED() #Remeber to set pin number
-Mode_Led2 = gpiozero.LED() #Remeber to set pin number
-Grip_Led1 = gpiozero.LED() #Remeber to set pin number
-Grip_Led2 = gpiozero.LED() #Remeber to set pin number
-Grip_Led3 = gpiozero.LED() #Remeber to set pin number
+Mode_Led1 = gpiozero.LED(23)
+Mode_Led2 = gpiozero.LED(24)
+Grip_Led1 = gpiozero.LED(25)
+Grip_Led2 = gpiozero.LED(8) 
+Grip_Led3 = gpiozero.LED(7)
 
-Mode_Button = gpiozero.Button(18)
-Grip_Button = gpiozero.Button() #Remeber to set pin number
+Mode_Button = gpiozero.Button(4)
+Grip_Button = gpiozero.Button(18) 
 
 
 controllerThread = Thread(target=mainController.runProsthetic)
 controllerThread.start()
+
+Mode_Led1.on()
+Grip_Led1.on()
 
 while True:
 
