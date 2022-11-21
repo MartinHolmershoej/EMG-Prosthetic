@@ -46,6 +46,17 @@ while True:
                 lastGripRequest = timeOfRequest + datetime.timedelta(seconds=0.2)
 
                 mainController.ChangeGrip()
+                
+                #need changing
+                if Grip_Led1.on()==True:
+                    Grip_Led1.off()
+                    Grip_Led2.on()
+                elif Grip_Led2.on()==True:
+                    Grip_Led2.off()
+                    Grip_Led3.on()
+                elif Grip_Led3.on()==True:
+                    Grip_Led3.off()
+                    Grip_Led1.on()
 
 
 
