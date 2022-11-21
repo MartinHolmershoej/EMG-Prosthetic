@@ -18,10 +18,10 @@ import gpiozero
 
 
 # create 4 motor objects - no motors atm, so LED is created instead
-motor_1 = gpiozero.LED() #thumb
-motor_2 = gpiozero.LED() #index finger
-motor_3 = gpiozero.LED() #middle finger
-motor_4 = gpiozero.LED() #ring and little finger
+motor_1 = gpiozero.LED(12) #thumb
+motor_2 = gpiozero.LED(16) #index finger
+motor_3 = gpiozero.LED(20) #middle finger
+motor_4 = gpiozero.LED(21) #ring and little finger
 
 class MotorController():
     

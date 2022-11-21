@@ -10,7 +10,7 @@ active = False
 gripGroup = 1
 result = 0
 sensorList = []
-pinList = [11,13,15,19] #For the sensors
+pinList = [17,27,22,10] #For the sensors
 motorThread = Thread(target=MotorController.MoveHand, args=(result))
 
 
