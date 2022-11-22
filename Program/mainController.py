@@ -3,6 +3,7 @@ from advanced_factory import AdvancedFactory
 from s_EMG_Sensor import sEMGSensor
 from motorController import MotorController
 from threading import Thread
+from multiprocessing import process
 import gpiozero
 
 Mode = True
@@ -12,7 +13,7 @@ result = 0
 sensorList = []
 pinList = [17,27,22,10] #For the sensors
 motorThread = Thread(target=MotorController.MoveHand, args=(result))
-
+consumerThread = process
 
 #--------------REMBER TO JOIN THE THREAD--------------#
 def runProsthetic():
@@ -22,6 +23,7 @@ def runProsthetic():
         if Mode and not active:
             active = True
             producerThread.join()
+            consumerThread.join()
             powerSensorsOff(sensorList, pinList)
 
             #Create objects here etc
@@ -36,13 +38,15 @@ def runProsthetic():
             
             consumerThread = Thread(target=Algorithm.Baseline, args=(queueList)) 
             consumerThread.run()
-            consumerThread = Thread(target=Algorithm.Analyse, args=(queueList, gripGroup)) 
+            consumerThread.join()
+            consumerThread = process(target=Algorithm.Analyse, args=(queueList, gripGroup)) 
                         
         #Here we change the mode to advanced
         elif not Mode and active:
             active = False
             gripGroup = 1
             producerThread.join()
+            consumerThread.join()
             powerSensorsOff(sensorList, pinList)
 
             #Create objects here etc
@@ -55,7 +59,8 @@ def runProsthetic():
             producerThread = Thread(target=sEMGSensor.getData, args=(sensorList, queueList))
             producerThread.start()
                         
-            consumerThread = Thread(target=Algorithm.Analyse, args=(queueList))
+            consumerThread = process(target=Algorithm.Analyse, args=(queueList))
+            
             
         #call the analyse etc.
         result = consumerThread.run()
