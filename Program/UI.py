@@ -3,6 +3,7 @@ import mainController
 from threading import Thread
 
 SimpleMode = True
+grip = 1
 
 lastModeRequest = datetime.datetime.now()
 lastGripRequest = datetime.datetime.now()
@@ -33,10 +34,17 @@ while True:
             if not SimpleMode:
                 SimpleMode = True
                 mainController.Mode = True
+                Grip_Led1.on()
+                Grip_Led2.off()
+                Grip_Led3.off()
+                
 
             else:
                 SimpleMode = False
                 mainController.Mode = False
+                Grip_Led1.off()
+                Grip_Led2.off()
+                Grip_Led3.off()
 
 
     if Grip_Button.is_pressed:
@@ -47,16 +55,18 @@ while True:
 
                 mainController.ChangeGrip()
                 
-                #need changing
-                if Grip_Led1.on()==True:
+                if grip == 1:
                     Grip_Led1.off()
                     Grip_Led2.on()
-                elif Grip_Led2.on()==True:
+                    grip +=1
+                elif grip == 2:
                     Grip_Led2.off()
                     Grip_Led3.on()
-                elif Grip_Led3.on()==True:
+                    grip +=1
+                elif grip == 3:
                     Grip_Led3.off()
                     Grip_Led1.on()
+                    grip = 1
 
 
 
