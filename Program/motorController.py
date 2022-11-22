@@ -1,4 +1,3 @@
-import gpiozero
 from Motor import Motor
 
 
