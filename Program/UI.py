@@ -1,5 +1,5 @@
-import gpiozero, datetime, multiprocessing
 import mainController
+import gpiozero, datetime, multiprocessing
 from threading import Thread
 
 SimpleMode = True
@@ -12,8 +12,8 @@ lastGripRequest = datetime.datetime.now()
 Mode_Led1 = gpiozero.LED(23)
 Mode_Led2 = gpiozero.LED(24)
 Grip_Led1 = gpiozero.LED(25)
-Grip_Led2 = gpiozero.LED(8) 
-Grip_Led3 = gpiozero.LED(7)
+Grip_Led2 = gpiozero.LED(5) 
+Grip_Led3 = gpiozero.LED(6)
 
 Mode_Button = gpiozero.Button(4)
 Grip_Button = gpiozero.Button(18) 
