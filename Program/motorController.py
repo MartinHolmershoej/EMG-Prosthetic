@@ -7,8 +7,8 @@ from Motor import Motor
 # open = 0 - default open hand/paper
 
 # fist/rock = 1
-# pinch = 2
-# thumb up = 3
+# scissor = 2
+# pinch = 3
 # F you = 4
 # point = 5
 # ok = 6
@@ -40,15 +40,15 @@ class MotorController():
                 motor_3.RunOut()
                 motor_4.RunOut()  
                   
-            case 2: # difficut with leds
-                motor_1.RunIn()
+            case 2: 
+                motor_1.RunOut()
                 motor_2.RunIn()
                 motor_3.RunIn()
-                motor_4.RunIn()
+                motor_4.RunOut()
                 
-            case 3:
+            case 3: # difficut with leds
                 motor_1.RunIn()
-                motor_2.RunOut()
+                motor_2.RunIn()
                 motor_3.RunOut()
                 motor_4.RunOut()  
                               
@@ -65,8 +65,8 @@ class MotorController():
                 motor_4.RunOut()  
                               
             case 6: # difficut with leds
-                motor_1.RunIn()
-                motor_2.RunIn()
+                motor_1.RunOut()
+                motor_2.RunOut()
                 motor_3.RunIn()
                 motor_4.RunIn()                
         
