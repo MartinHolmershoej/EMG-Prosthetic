@@ -1,6 +1,6 @@
 import Ialgorithm
 
-class AdvancedAlgorithm(Ialgorithm):
+class AdvancedAlgorithm(Ialgorithm.ABC):
 
     def Analyse(queueList):
         result = 0

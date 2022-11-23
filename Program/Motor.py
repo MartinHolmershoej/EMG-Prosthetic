@@ -2,7 +2,7 @@ import IMotor
 import gpiozero
 
 
-class Motor(IMotor):
+class Motor(IMotor.ABC):
     
     def __init__(self, pin):
         self.pin = pin
