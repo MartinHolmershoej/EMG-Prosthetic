@@ -83,20 +83,18 @@ def powerSensorsOff(sensorList, pinList):
         device.Off()
     
 def ChangeGrip():
-    gripGroup =+1
 
     if gripGroup == 1:
         #set grip group to the first set
-        print("grip 1")
+        gripGroup = 2
+        
     elif gripGroup == 2:
         #set grip group to the second set
-        print("grip 2")
+        gripGroup = 3
                         
     elif gripGroup == 3:
         #set grip group to the third set
-        print("grip 3")
-        gripGroup = 0
+        gripGroup = 1
 
     else:
-        print("grip 1")
         gripGroup = 1
