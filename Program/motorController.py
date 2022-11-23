@@ -27,46 +27,45 @@ class MotorController():
     
     def MoveHand(result):
         
-        match result:
-            case 0:
-                motor_1.RunIn()
-                motor_2.RunIn()
-                motor_3.RunIn()
-                motor_4.RunIn()
+        if result == 0:
+            motor_1.RunIn()
+            motor_2.RunIn()
+            motor_3.RunIn()
+            motor_4.RunIn()
                 
-            case 1:
-                motor_1.RunOut()
-                motor_2.RunOut()
-                motor_3.RunOut()
-                motor_4.RunOut()  
+        elif result == 0:
+            motor_1.RunOut()
+            motor_2.RunOut()
+            motor_3.RunOut()
+            motor_4.RunOut()  
                   
-            case 2: 
-                motor_1.RunOut()
-                motor_2.RunIn()
-                motor_3.RunIn()
-                motor_4.RunOut()
+        elif result == 0:
+            motor_1.RunOut()
+            motor_2.RunIn()
+            motor_3.RunIn()
+            motor_4.RunOut()
                 
-            case 3: # difficut with leds
-                motor_1.RunIn()
-                motor_2.RunIn()
-                motor_3.RunOut()
-                motor_4.RunOut()  
+        elif result == 0: #difficult to make with leds
+            motor_1.RunIn()
+            motor_2.RunIn()
+            motor_3.RunOut()
+            motor_4.RunOut()  
                               
-            case 4:
-                motor_1.RunOut()
-                motor_2.RunOut()
-                motor_3.RunIn()
-                motor_4.RunOut()   
+        elif result == 0:
+            motor_1.RunOut()
+            motor_2.RunOut()
+            motor_3.RunIn()
+            motor_4.RunOut()   
                              
-            case 5:
-                motor_1.RunOut()
-                motor_2.RunIn()
-                motor_3.RunOut()
-                motor_4.RunOut()  
+        elif result == 0:
+            motor_1.RunOut()
+            motor_2.RunIn()
+            motor_3.RunOut()
+            motor_4.RunOut()  
                               
-            case 6: # difficut with leds
-                motor_1.RunOut()
-                motor_2.RunOut()
-                motor_3.RunIn()
-                motor_4.RunIn()                
+        elif result == 0: #difficult to make with leds
+            motor_1.RunOut()
+            motor_2.RunOut()
+            motor_3.RunIn()
+            motor_4.RunIn()                
         
