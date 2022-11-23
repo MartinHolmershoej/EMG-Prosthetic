@@ -13,6 +13,6 @@ class Motor(IMotor.ABC):
         led.on()
         
     
-    def RunIn():
+    def RunIn(self):
         led = gpiozero.LED(self.pin)
         led.off()
