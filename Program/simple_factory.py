@@ -1,15 +1,21 @@
 from abstract_factory import AbstractFactory
 from simple_algorithm import SimpleAlgorithm
-import few_sensors, few_queues
+from few_sensors import FewSensors
+import few_queues  
 
 class SimpleFactory(AbstractFactory):
+    
+    def __init__(self) -> None:
+        self.fewSensors = FewSensors()
+        
+    
     #Overwrites the abstract method, to create the simple mode
     def create_mode(self):
-        return SimpleAlgorithm
+        return SimpleAlgorithm()
 
     #Overwrites the abstract method, to create many sensors
-    def create_sensors(self):
-        sensorList = few_sensors.createList()
+    def create_channels(self):
+        sensorList = self.fewSensors.createChannelList()
         return sensorList
     
     #Overwrites the abstract method, to create many queues
