@@ -1,7 +1,6 @@
 from simple_factory import SimpleFactory
 from advanced_factory import AdvancedFactory
 from s_EMG_Sensor import sEMGSensor
-from motorController import MotorController
 from threading import Thread
 from multiprocessing import Process
 import gpiozero    
@@ -12,16 +11,20 @@ class MainController():
         self.Mode = SimpleMode
         self.active = False
         self.gripGroup = 1
-        self.result = 0
         self.Algorithm = None
         self.sensor = sEMGSensor()
+        
+        self.device1 = gpiozero.OutputDevice(17)
+        self.device2 = gpiozero.OutputDevice(27)
+        self.device3 = gpiozero.OutputDevice(22)
+        self.device4 = gpiozero.OutputDevice(10)
+
         
         self.channelList = []
         self.queueList =[]
         self.pinList = [17,27,22,10] #For the sensors
         
-        self.motorThread = Thread(target=MotorController.MoveHand, args=[self.result])
-        self.producerThread = Thread()
+        self.producerThread = Process()
         self.consumerThread = Process()
         
 
@@ -49,8 +52,7 @@ class MainController():
                 self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
                 self.producerThread.start()
                 
-                self.consumerThread = Thread(target=self.Algorithm.Baseline, args=[self.queueList]) 
-                self.consumerThread.run()
+                self.Algorithm.Baseline(self.queueList)
 
                 self.consumerThread = Process(target=self.Algorithm.Analyse, args=[self.queueList, self.gripGroup]) 
                             
@@ -78,25 +80,32 @@ class MainController():
                 
                 
             #call the analyse etc.
-            self.result = self.consumerThread.run()
+            self.consumerThread.run()
             
-            #call motor thread with result as parameter
-            #need to find a way to share result safely between consumer and motor
-            #self.motorThread.run()
 
     def powerSensorsOn(self, sensorList, pinList):
         
-        for i in range(len(sensorList)):
+        if(len(sensorList)) == 2:
+            self.device1.on()
+            self.device2.on()
             
-            device = gpiozero.OutputDevice(pinList[i])
-            device.on()
+        elif(len(sensorList)) == 4:
+            self.device1.on()
+            self.device2.on()
+            self.device3.on()
+            self.device4.on()
             
     def powerSensorsOff(self, sensorList, pinList):
         
-        for i in range(len(sensorList)):
+        if(len(sensorList)) == 2:
+            self.device1.off()
+            self.device2.off()
             
-            device = gpiozero.OutputDevice(pinList[i])
-            device.off()
+        elif(len(sensorList)) == 4:
+            self.device1.off()
+            self.device2.off()
+            self.device3.off()
+            self.device4.off()
         
     def ChangeGrip(self):
 
