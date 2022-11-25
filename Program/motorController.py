@@ -33,37 +33,37 @@ class MotorController():
             motor_3.RunIn()
             motor_4.RunIn()
                 
-        elif result == 0:
+        elif result == 1:
             motor_1.RunOut()
             motor_2.RunOut()
             motor_3.RunOut()
             motor_4.RunOut()  
                   
-        elif result == 0:
+        elif result == 2:
             motor_1.RunOut()
             motor_2.RunIn()
             motor_3.RunIn()
             motor_4.RunOut()
                 
-        elif result == 0: #difficult to make with leds
+        elif result == 3: #difficult to make with leds
             motor_1.RunIn()
             motor_2.RunIn()
             motor_3.RunOut()
             motor_4.RunOut()  
                               
-        elif result == 0:
+        elif result == 4:
             motor_1.RunOut()
             motor_2.RunOut()
             motor_3.RunIn()
             motor_4.RunOut()   
                              
-        elif result == 0:
+        elif result == 5:
             motor_1.RunOut()
             motor_2.RunIn()
             motor_3.RunOut()
             motor_4.RunOut()  
                               
-        elif result == 0: #difficult to make with leds
+        elif result == 6: #difficult to make with leds
             motor_1.RunOut()
             motor_2.RunOut()
             motor_3.RunIn()
