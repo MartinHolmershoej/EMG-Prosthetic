@@ -1,12 +1,9 @@
-
-
 from abc import ABC
-
 
 class IMotor(ABC):
     
-    def RunOut():
+    def RunOut(self):
         pass
     
-    def RunIn():
+    def RunIn(self):
         pass
