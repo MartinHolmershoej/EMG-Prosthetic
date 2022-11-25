@@ -1,15 +1,19 @@
 from abstract_factory import AbstractFactory
 from advanced_algorithm import AdvancedAlgorithm
-import many_sensors, many_queues
+from many_sensors import ManySensors
+import many_queues
 
 class AdvancedFactory(AbstractFactory):
+    def __init__(self) -> None:
+        self.manySensors = ManySensors()
+        
     #Overwrites the abstract method, to create advanced mode
-    def create_mode():
+    def create_mode(self):
         return AdvancedAlgorithm
 
     #Overwrites the abstract method, to create many sensors
-    def create_sensors():
-        sensorList = many_sensors.createList()
+    def create_channels(self):
+        sensorList = self.manySensors.createChannelList()
         return sensorList
     
     #Overwrites the abstract method, to create many queuea
