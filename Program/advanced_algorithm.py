@@ -1,6 +1,7 @@
 from multiprocessing import Queue
 import Ialgorithm
 
+eMGList = []
 
 class AdvancedAlgorithm(Ialgorithm.ABC):
 
@@ -11,18 +12,16 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
         queue3 = queueList[2]
         queue4 = queueList[3]
 
-        eMGList = range(24)
-
-        for i in range(8):
+        for i in range(32):
             queue1Value = queue1.get()
             queue2Value = queue2.get()
             queue3Value = queue3.get()
             queue4Value = queue4.get()
         
-            eMGList.append(queue1Value)
-            eMGList.append(queue2Value)
-            eMGList.append(queue3Value)
-            eMGList.append(queue4Value)
+            eMGList.insert(i,queue1Value)
+            eMGList.insert(i,queue2Value)
+            eMGList.insert(i,queue3Value)
+            eMGList.insert(i,queue4Value)
             i += 1
         return eMGList
 
