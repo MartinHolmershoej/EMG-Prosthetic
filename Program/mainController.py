@@ -3,6 +3,7 @@ from advanced_factory import AdvancedFactory
 from s_EMG_Sensor import sEMGSensor
 from threading import Thread
 from multiprocessing import Process
+from time import sleep
 import gpiozero    
 
 class MainController():
@@ -48,6 +49,7 @@ class MainController():
                 self.channelList = factory.create_channels()
                 self.queueList = factory.create_queues()
                 self.powerSensorsOn(self.channelList, self.pinList)
+                sleep(7) # added the sleep to make sure that the sensors has setteled in
                 
                 self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
                 self.producerThread.start()
