@@ -14,6 +14,7 @@ class TestSimpleAlgorithm(unittest.TestCase):
         self.q2.put(value2)
         
         self.queueList = [self.q1, self.q2]
+        return self.queueList
     
     #help function for filling up the queue
     def fillQueueForBaseline(self):
@@ -28,55 +29,73 @@ class TestSimpleAlgorithm(unittest.TestCase):
             self.q2.put(0.800)
         
         self.queueList = [self.q1, self.q2]
+        return self.queueList
 
 
     def test_Baseline(self):
-        self.fillQueueForBaseline()
-        simple_algorithm.SimpleAlgorithm.Baseline(self.queueList)
-        self.assertEqual(simple_algorithm.baseline_1, simple_algorithm.baseline_2, (0.65, 0.750))
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForBaseline()
+        simple.Baseline(QList)
+        self.assertEqual((simple.baseline_1, simple.baseline_2), (1.17, 0.9))
 
 
     def test_Analyse_Upper_gripGroup_1(self):
         gripGroup = 1
-        self.fillQueueForAnalyse(0.700, 0.500)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),1)
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1.3, 0.500)
+        simple.Analyse(QList, gripGroup)
+        self.assertEqual(simple.result, 1)
     
     def test_Analyse_Upper_gripGroup_2(self):
         gripGroup = 2
-        self.fillQueueForAnalyse(0.700, 0.500)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),3)
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1.3, 0.500)
+        simple.Analyse(QList, gripGroup)
+        self.assertEqual(simple.result, 3)
     
     def test_Analyse_Upper_gripGroup_3(self):
         gripGroup = 3
-        self.fillQueueForAnalyse(0.700, 0.500)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),5) 
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1.3, 0.500)
+        simple.Analyse(QList, gripGroup)
+        self.assertEqual(simple.result, 5)
         
     def test_Analyse_Lower_gripGroup_1(self):
         gripGroup = 1
-        self.fillQueueForAnalyse(0.500, 0.800)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),2)
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1, 1)
+        simple.Analyse(QList, gripGroup)
+        self.assertEqual(simple.result, 2)
     
     def test_Analyse_Lower_gripGroup_2(self):
         gripGroup = 2
-        self.fillQueueForAnalyse(0.500, 0.800)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),4)
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1, 1)
+        simple.Analyse(QList, gripGroup)
+        self.assertEqual(simple.result, 4)
     
     def test_Analyse_Lower_gripGroup_3(self):
         gripGroup = 3
-        self.fillQueueForAnalyse(0.500, 0.800)
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),6)
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1, 1)
+        simple.Analyse(QList, gripGroup)
+        self.assertEqual(simple.result, 6)
 
         
     def test_Analyse_return0_value1_True(self):
         gripGroup = 1
-        self.fillQueueForAnalyse(0.700, 0.800)        
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),0)
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1.3, 1)
+        simple.Analyse(QList, gripGroup)      
+        self.assertEqual(simple.result, 0)
     
     
     def test_Analyse_return0_value2_True(self):
         gripGroup = 1
-        self.fillQueueForAnalyse(0.700, 0.800)        
-        self. assertEqual(simple_algorithm.SimpleAlgorithm.Analyse(self.queueList, gripGroup),0)
+        simple = simple_algorithm.SimpleAlgorithm()
+        QList = self.fillQueueForAnalyse(1.3, 1)
+        simple.Analyse(QList, gripGroup)      
+        self.assertEqual(simple.result, 0)
         
     
     
