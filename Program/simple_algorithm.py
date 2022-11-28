@@ -57,8 +57,8 @@ class SimpleAlgorithm(Ialgorithm.ABC):
              value1 += queue1.get()
              value2 += queue2.get()
             
-        self.baseline_1 = (round(value1/10.0,2))
-        self.baseline_2 = (round(value2/10.0,2))
+        self.baseline_1 = (round((value1/10.0)*1.8,3))
+        self.baseline_2 = (round((value2/10.0)*1.2,3))
         
         print(str(self.baseline_1))
         print(str(self.baseline_2))
