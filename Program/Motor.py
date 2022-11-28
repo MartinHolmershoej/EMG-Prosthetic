@@ -6,13 +6,12 @@ class Motor(IMotor.ABC):
     
     def __init__(self, pin):
         self.pin = pin
+        self.led = gpiozero.LED(self.pin)
         
     
     def RunOut(self):
-        led = gpiozero.LED(self.pin)
-        led.on()
+        self.led.on()
         
     
     def RunIn(self):
-        led = gpiozero.LED(self.pin)
-        led.off()
+        self.led.off()

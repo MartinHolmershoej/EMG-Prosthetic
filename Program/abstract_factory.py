@@ -7,7 +7,7 @@ class AbstractFactory(ABC):
         pass
     
     @abstractmethod
-    def create_sensors(self):
+    def create_channels(self):
         pass
     
     #might need a queue creation

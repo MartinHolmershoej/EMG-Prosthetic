@@ -1,4 +1,5 @@
-import mainController
+from time import sleep
+from mainController import MainController
 import gpiozero, datetime, multiprocessing
 from threading import Thread
 
@@ -18,8 +19,9 @@ Grip_Led3 = gpiozero.LED(6)
 Mode_Button = gpiozero.Button(4)
 Grip_Button = gpiozero.Button(18) 
 
+main = MainController(SimpleMode)
 
-controllerThread = Thread(target=mainController.runProsthetic)
+controllerThread = Thread(target=MainController.runProsthetic, args=[main])
 controllerThread.start()
 
 Mode_Led1.on()
@@ -33,7 +35,10 @@ while True:
             lastModeRequest = timeOfRequest + datetime.timedelta(seconds=0.2)
             if not SimpleMode:
                 SimpleMode = True
-                mainController.Mode = True
+                main.Mode = True
+                Mode_Led1.on()
+                Mode_Led2.off()
+
                 Grip_Led1.on()
                 Grip_Led2.off()
                 Grip_Led3.off()
@@ -41,7 +46,10 @@ while True:
 
             else:
                 SimpleMode = False
-                mainController.Mode = False
+                main.Mode = False
+                Mode_Led1.off()
+                Mode_Led2.on()
+
                 Grip_Led1.off()
                 Grip_Led2.off()
                 Grip_Led3.off()
@@ -53,7 +61,7 @@ while True:
                 timeOfRequest = datetime.datetime.now()
                 lastGripRequest = timeOfRequest + datetime.timedelta(seconds=0.2)
 
-                mainController.ChangeGrip()
+                main.ChangeGrip()
                 
                 if grip == 1:
                     Grip_Led1.off()

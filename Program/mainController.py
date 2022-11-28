@@ -1,100 +1,125 @@
 from simple_factory import SimpleFactory
 from advanced_factory import AdvancedFactory
 from s_EMG_Sensor import sEMGSensor
-from motorController import MotorController
 from threading import Thread
-from multiprocessing import process
-import gpiozero
+from multiprocessing import Process
+import gpiozero    
 
-Mode = True
-active = False
-gripGroup = 1
-result = 0
-sensorList = []
-pinList = [17,27,22,10] #For the sensors
-motorThread = Thread(target=MotorController.MoveHand, args=(result))
-consumerThread = process
+class MainController():
 
-#--------------REMBER TO JOIN THE THREAD--------------#
-def runProsthetic():
-    while True:
-
-        #Here we change the mode to simple
-        if Mode and not active:
-            active = True
-            producerThread.join()
-            consumerThread.join()
-            powerSensorsOff(sensorList, pinList)
-
-            #Create objects here etc
-            factory = SimpleFactory
-            Algorithm = factory.create_mode()
-            sensorList = factory.create_sensors()
-            queueList = factory.create_queues()
-            powerSensorsOn(sensorList, pinList)
-            
-            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList, queueList))
-            producerThread.start()
-            
-            consumerThread = Thread(target=Algorithm.Baseline, args=(queueList)) 
-            consumerThread.run()
-            consumerThread.join()
-            consumerThread = process(target=Algorithm.Analyse, args=(queueList, gripGroup)) 
-                        
-        #Here we change the mode to advanced
-        elif not Mode and active:
-            active = False
-            gripGroup = 1
-            producerThread.join()
-            consumerThread.join()
-            powerSensorsOff(sensorList, pinList)
-
-            #Create objects here etc
-            factory = AdvancedFactory
-            Algorithm = factory.create_mode()
-            sensorList = factory.create_sensors()
-            queueList = factory.create_queues()
-            powerSensorsOn(sensorList, pinList)
-            
-            producerThread = Thread(target=sEMGSensor.getData, args=(sensorList, queueList))
-            producerThread.start()
-                        
-            consumerThread = process(target=Algorithm.Analyse, args=(queueList))
-            
-            
-        #call the analyse etc.
-        result = consumerThread.run()
+    def __init__(self, SimpleMode) -> None:
+        self.Mode = SimpleMode
+        self.active = False
+        self.gripGroup = 1
+        self.Algorithm = None
+        self.sensor = sEMGSensor()
         
-        #call motor thread with result as parameter
-        motorThread.run(result)
+        self.device1 = gpiozero.OutputDevice(17)
+        self.device2 = gpiozero.OutputDevice(27)
+        self.device3 = gpiozero.OutputDevice(22)
+        self.device4 = gpiozero.OutputDevice(10)
 
-def powerSensorsOn(sensorList, pinList):
-    
-    for i in range(len(sensorList)):
         
-        device = gpiozero.OutputDevice(pinList[i])
-        device.on()
+        self.channelList = []
+        self.queueList =[]
+        self.pinList = [17,27,22,10] #For the sensors
         
-def powerSensorsOff(sensorList, pinList):
-    
-    for i in range(len(sensorList)):
+        self.producerThread = Process()
+        self.consumerThread = Process()
         
-        device = gpiozero.OutputDevice(pinList[i])
-        device.Off()
-    
-def ChangeGrip():
 
-    if gripGroup == 1:
-        #set grip group to the first set
-        gripGroup = 2
-        
-    elif gripGroup == 2:
-        #set grip group to the second set
-        gripGroup = 3
-                        
-    elif gripGroup == 3:
-        #set grip group to the third set
-        gripGroup = 1
+    #--------------REMBER TO JOIN THE THREAD--------------#
+    def runProsthetic(self):
 
-    else:
-        gripGroup = 1
+        while True:
+
+            #Here we change the mode to simple
+            if self.Mode and not self.active:
+                self.active = True
+                if self.producerThread.is_alive():
+                    self.producerThread.kill()
+                    self.producerThread.join()
+
+                self.powerSensorsOff(self.channelList, self.pinList)
+
+                #Create objects here etc
+                factory = SimpleFactory()
+                self.Algorithm = factory.create_mode()
+                self.channelList = factory.create_channels()
+                self.queueList = factory.create_queues()
+                self.powerSensorsOn(self.channelList, self.pinList)
+                
+                self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
+                self.producerThread.start()
+                
+                self.Algorithm.Baseline(self.queueList)
+
+                self.consumerThread = Process(target=self.Algorithm.Analyse, args=[self.queueList, self.gripGroup]) 
+                            
+            #Here we change the mode to advanced
+            elif not self.Mode and self.active:
+                self.active = False
+                self.gripGroup = 1
+                if self.producerThread.is_alive():
+                    self.producerThread.kill()
+                    self.producerThread.join()
+                    
+                self.powerSensorsOff(self.channelList, self.pinList)
+
+                #Create objects here etc
+                factory = AdvancedFactory()
+                self.Algorithm = factory.create_mode()
+                self.channelList = factory.create_channels()
+                self.queueList = factory.create_queues()
+                self.powerSensorsOn(self.channelList, self.pinList)
+                
+                self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
+                self.producerThread.start()
+                            
+                self.consumerThread = Process(target=self.Algorithm.Analyse, args=[self.queueList])
+                
+                
+            #call the analyse etc.
+            self.consumerThread.run()
+            
+
+    def powerSensorsOn(self, sensorList, pinList):
+        
+        if(len(sensorList)) == 2:
+            self.device1.on()
+            self.device2.on()
+            
+        elif(len(sensorList)) == 4:
+            self.device1.on()
+            self.device2.on()
+            self.device3.on()
+            self.device4.on()
+            
+    def powerSensorsOff(self, sensorList, pinList):
+        
+        if(len(sensorList)) == 2:
+            self.device1.off()
+            self.device2.off()
+            
+        elif(len(sensorList)) == 4:
+            self.device1.off()
+            self.device2.off()
+            self.device3.off()
+            self.device4.off()
+        
+    def ChangeGrip(self):
+
+        if self.gripGroup == 1:
+            #set grip group to the first set
+            self.gripGroup = 2
+            
+        elif self.gripGroup == 2:
+            #set grip group to the second set
+            self.gripGroup = 3
+                            
+        elif self.gripGroup == 3:
+            #set grip group to the third set
+            self.gripGroup = 1
+
+        else:
+            self.gripGroup = 1

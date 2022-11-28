@@ -1,15 +1,11 @@
-from multiprocessing import Queue
-
-Stop_Thread = False
 
 class sEMGSensor():
 
-    def getData(sensorList, queueList):
+    def getData(self, channelList, queueList):
         while True:
-            for i in range(len(sensorList)):
-                queue = queueList[i]
-                sensor = sensorList[i]
-                queue.put(sensor.voltage)
+            for i in range(len(channelList)):
+                channel = channelList[i-1]
+                queue = queueList[i-1]
+                queue.put(channel.voltage)
                 
-                if Stop_Thread:
-                    break
+                
