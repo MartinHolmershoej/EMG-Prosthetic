@@ -3,6 +3,9 @@ from multiprocessing import Queue
 import advanced_algorithm 
 
 class TestAdvancedAlgorithm(unittest.TestCase):
+
+    def __init__(self, methodName: str = ...) -> None:
+        self.advanced = advanced_algorithm.AdvancedAlgorithm()
  
     #help function for filling up the queue
     def fillQueueForAnalyse(self):
@@ -12,7 +15,7 @@ class TestAdvancedAlgorithm(unittest.TestCase):
         self.q3 = Queue(maxsize=0)
         self.q4 = Queue(maxsize=0)
         
-        for x in range(7):
+        for x in range(4):
             self.q1.put(0.600)
             self.q2.put(0.700)
             self.q3.put(0.650)
@@ -24,10 +27,17 @@ class TestAdvancedAlgorithm(unittest.TestCase):
         
         self.queueList = [self.q1, self.q2, self.q3, self.q4]
 
-    def test_Analyse(self):
+    def test_length_eMGList(self):
         self.fillQueueForAnalyse()
-        advanced_algorithm.AdvancedAlgorithm.Analyse(self.queueList)
-        self.assertEqual(advanced_algorithm.eMGList, (0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650, 0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650, 0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650, 0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650))
+        self.advanced.AddToEMGList(self,self.queueList)
+        length = 32
+        self.assertEqual(length, len(self.advanced.eMGList))
+
+
+    #def test_Analyse(self):
+    #    self.fillQueueForAnalyse()
+    #    advanced_algorithm.AdvancedAlgorithm.Analyse(self.queueList)
+    #    self.assertEqual(advanced_algorithm.AdvancedAlgorithm.eMGList, (0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650, 0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650, 0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650, 0.600, 0.700, 0.650, 0.750, 0.700, 0.800, 0.700, 0.650))
 
 
 if __name__ == '__main__':
