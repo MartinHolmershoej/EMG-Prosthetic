@@ -6,7 +6,9 @@ class TestFewSensors(unittest.TestCase):
     
     def test_createSensors(self):
         
-        self.assertEqual(len(few_sensors.createList), 2)
+        sensor = few_sensors.FewSensors()  
+        clist = sensor.createChannelList()      
+        self.assertEqual(len(clist), 2)
 
 if __name__ == '__main__':
     unittest.main()
