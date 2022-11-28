@@ -17,7 +17,7 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
         queue3 = queueList[2]
         queue4 = queueList[3]
 
-        if len(self.eMGList) == 0:
+        if len(eMGList) == 0:
             for i in range(8):
                 queue1Value = queue1.get()
                 queue2Value = queue2.get()
@@ -30,7 +30,7 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
                 self.eMGList.append(queue3Value)
                 self.eMGList.append(queue4Value)
         
-        elif len(self.eMGList) == 32:
+        elif len(eMGList) == 32:
             queue1Value = queue1.get()
             queue2Value = queue2.get()
             queue3Value = queue3.get()
@@ -47,6 +47,17 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
         else:
             self.eMGList.clear()
 
+            for i in range(8):
+                queue1Value = queue1.get()
+                queue2Value = queue2.get()
+                queue3Value = queue3.get()
+                queue4Value = queue4.get()
+            
+                self.eMGList.append(queue1Value)
+                self.eMGList.append(queue2Value)
+                self.eMGList.append(queue3Value)
+                self.eMGList.append(queue4Value)
+
         return self.eMGList
 
     def predict(self, eMGList):
@@ -54,7 +65,7 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
         self.prediction = clf.predict(np.asarray(eMGList).reshape(1,-1))
 
         return self.prediction
-        
+
 # Skal køres i denne rækkefølge:
 # test = AdvancedAlgorithm()
 # test.AddToEMGList(test.eMGList)

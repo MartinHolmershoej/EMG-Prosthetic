@@ -17,7 +17,7 @@ class AdAlgoLists():
         queue3 = [70, 65, 70, 75, 70, 50, 60, 80]
         queue4 = [70, 60, 50, 70, 70, 50, 60, 80]
         
-        for i in range(8):
+        for i in range(6):
             queue1Value = queue1.pop(0)
             queue2Value = queue2.pop(0)
             queue3Value = queue3.pop(0)
@@ -51,6 +51,7 @@ class AdAlgoLists():
                 self.eMGList.append(queue4Value)
         
         elif len(eMGList) == 32:
+
             queue1Value = queue1_1.pop(0)
             queue2Value = queue2_1.pop(0)
             queue3Value = queue3_1.pop(0)
@@ -77,12 +78,10 @@ class AdAlgoLists():
                 self.eMGList.append(queue3Value)
                 self.eMGList.append(queue4Value)
 
-
         return self.eMGList
 
 
 test1 = AdAlgoLists()
-
 test1.FillEMGList(test1.eMGList)
 
 class MAL():
