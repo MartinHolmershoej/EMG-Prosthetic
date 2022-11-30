@@ -67,6 +67,7 @@ class TestAdvancedAlgorithm(unittest.TestCase):
         EMGList = self.fillEMGListForAnalyse(8)
         advanced.AddToEMGList(QList, EMGList)
         self.assertEqual(advanced.eMGList, [70, 70, 70, 70, 50, 55, 65, 60, 60, 60, 70, 50, 80, 80, 75, 70, 70, 70, 70, 70, 50, 50, 50, 50, 60, 60, 60, 60, 0.400, 0.400, 0.400, 0.400])
-
+        
+        
 if __name__ == '__main__':
     unittest.main()

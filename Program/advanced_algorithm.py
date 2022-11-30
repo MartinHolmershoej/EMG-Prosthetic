@@ -25,10 +25,10 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
                 queue4Value = queue4.get()
             
 
-                self.eMGList.append(queue1Value)
-                self.eMGList.append(queue2Value)
-                self.eMGList.append(queue3Value)
-                self.eMGList.append(queue4Value)
+                eMGList.append(queue1Value)
+                eMGList.append(queue2Value)
+                eMGList.append(queue3Value)
+                eMGList.append(queue4Value)
         
         elif len(eMGList) == 32:
             queue1Value = queue1.get()
@@ -36,16 +36,16 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
             queue3Value = queue3.get()
             queue4Value = queue4.get()
 
-            self.eMGList.append(queue1Value)
-            self.eMGList.append(queue2Value)
-            self.eMGList.append(queue3Value)
-            self.eMGList.append(queue4Value)
+            eMGList.append(queue1Value)
+            eMGList.append(queue2Value)
+            eMGList.append(queue3Value)
+            eMGList.append(queue4Value)
 
             for i in range(4):
-                self.eMGList.pop(0)
+                eMGList.pop(0)
 
         else:
-            self.eMGList.clear()
+            eMGList.clear()
 
             for i in range(8):
                 queue1Value = queue1.get()
@@ -53,11 +53,12 @@ class AdvancedAlgorithm(Ialgorithm.ABC):
                 queue3Value = queue3.get()
                 queue4Value = queue4.get()
             
-                self.eMGList.append(queue1Value)
-                self.eMGList.append(queue2Value)
-                self.eMGList.append(queue3Value)
-                self.eMGList.append(queue4Value)
-
+                eMGList.append(queue1Value)
+                eMGList.append(queue2Value)
+                eMGList.append(queue3Value)
+                eMGList.append(queue4Value)
+                
+        self.eMGList = eMGList
         return self.eMGList
 
     def predict(self, eMGList):
