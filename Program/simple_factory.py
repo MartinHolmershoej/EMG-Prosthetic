@@ -13,12 +13,12 @@ class SimpleFactory(AbstractFactory):
     def create_mode(self):
         return SimpleAlgorithm()
 
-    #Overwrites the abstract method, to create many sensors
+    #Overwrites the abstract method, to create few sensors
     def create_channels(self):
         sensorList = self.fewSensors.createChannelList()
         return sensorList
     
-    #Overwrites the abstract method, to create many queues
+    #Overwrites the abstract method, to create few queues
     def create_queues(self):
         queueList = few_queues.createQueues()
         return queueList
