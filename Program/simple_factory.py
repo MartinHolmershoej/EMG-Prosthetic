@@ -1,5 +1,5 @@
 from abstract_factory import AbstractFactory
-from simple_algorithm import SimpleAlgorithm
+from simple_controller import SimpleController
 from few_sensors import FewSensors
 import few_queues  
 
@@ -11,7 +11,7 @@ class SimpleFactory(AbstractFactory):
     
     #Overwrites the abstract method, to create the simple mode
     def create_mode(self):
-        return SimpleAlgorithm()
+        return SimpleController()
 
     #Overwrites the abstract method, to create many sensors
     def create_channels(self):
