@@ -55,7 +55,7 @@ class MainController():
                 
                 self.Algorithm_controller.Baseline(self.queueList)
 
-                self.consumerThread = Process(target=self.Algorithm_controller.Analyse, args=[self.queueList, self.gripGroup]) 
+                self.consumerThread = Process(target=self.Algorithm_controller.Analyse, args=[self.queueList]) 
                             
             #Here we change the mode to advanced
             elif not self.Mode and self.active:
@@ -65,14 +65,14 @@ class MainController():
                     self.producerThread.kill()
                     self.producerThread.join()
                     
-                self.powerSensorsOff(self.channelList, self.pinList)
+                self.powerSensorsOff(self.channelList)
 
                 #Create objects here etc
                 factory = AdvancedFactory()
                 self.Algorithm_controller = factory.create_mode()
                 self.channelList = factory.create_channels()
                 self.queueList = factory.create_queues()
-                self.powerSensorsOn(self.channelList, self.pinList)
+                self.powerSensorsOn(self.channelList)
                 
                 self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
                 self.producerThread.start()
@@ -84,25 +84,25 @@ class MainController():
             self.consumerThread.run()
             
 
-    def powerSensorsOn(self, sensorList):
+    def powerSensorsOn(self, channelList):
         
-        if(len(sensorList)) == 2:
+        if(len(channelList)) == 2:
             self.device1.on()
             self.device2.on()
             
-        elif(len(sensorList)) == 4:
+        elif(len(channelList)) == 4:
             self.device1.on()
             self.device2.on()
             self.device3.on()
             self.device4.on()
             
-    def powerSensorsOff(self, sensorList):
+    def powerSensorsOff(self, channelList):
         
-        if(len(sensorList)) == 2:
+        if(len(channelList)) == 2:
             self.device1.off()
             self.device2.off()
             
-        elif(len(sensorList)) == 4:
+        elif(len(channelList)) == 4:
             self.device1.off()
             self.device2.off()
             self.device3.off()
@@ -112,15 +112,20 @@ class MainController():
 
         if self.gripGroup == 1:
             #set grip group to the first set
+            self.Algorithm_controller.gripGroup = 2
             self.gripGroup = 2
             
         elif self.gripGroup == 2:
             #set grip group to the second set
+            self.Algorithm_controller.gripGroup = 3
             self.gripGroup = 3
                             
         elif self.gripGroup == 3:
             #set grip group to the third set
+            self.Algorithm_controller.gripGroup = 1
             self.gripGroup = 1
 
         else:
             self.gripGroup = 1
+            self.Algorithm_controller.gripGroup = 1
+
