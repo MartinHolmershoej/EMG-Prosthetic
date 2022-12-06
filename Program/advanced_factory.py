@@ -1,5 +1,5 @@
 from abstract_factory import AbstractFactory
-from advanced_algorithm import AdvancedAlgorithm
+from advanced_mode import AdvancedMode
 from many_sensors import ManySensors
 import many_queues
 
@@ -9,7 +9,7 @@ class AdvancedFactory(AbstractFactory):
         
     #Overwrites the abstract method, to create advanced mode
     def create_mode(self):
-        return AdvancedAlgorithm
+        return AdvancedMode()
 
     #Overwrites the abstract method, to create many sensors
     def create_channels(self):

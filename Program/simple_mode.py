@@ -3,7 +3,7 @@ from simple_algorithm import SimpleAlgorithm
 from motorController import MotorController
 
 
-class SimpleController(IController):
+class SimpleMode(IController):
     
     def __init__(self) -> None:
         self.algorithm = SimpleAlgorithm()

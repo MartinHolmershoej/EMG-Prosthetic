@@ -3,7 +3,7 @@ from motorController import MotorController
 from advanced_algorithm import AdvancedAlgorithm
 
 
-class AdvancedController(IController):
+class AdvancedMode(IController):
     
     def __init__(self) -> None:
         self.motor = MotorController()
