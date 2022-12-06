@@ -23,7 +23,6 @@ class MainController():
         
         self.channelList = []
         self.queueList =[]
-        self.pinList = [17,27,22,10] #For the sensors
         
         self.producerThread = Process()
         self.consumerThread = Process()
@@ -41,14 +40,14 @@ class MainController():
                     self.producerThread.kill()
                     self.producerThread.join()
 
-                self.powerSensorsOff(self.channelList, self.pinList)
+                self.powerSensorsOff(self.channelList,)
 
                 #Create objects here etc
                 factory = SimpleFactory()
                 self.Algorithm = factory.create_mode()
                 self.channelList = factory.create_channels()
                 self.queueList = factory.create_queues()
-                self.powerSensorsOn(self.channelList, self.pinList)
+                self.powerSensorsOn(self.channelList,)
                 sleep(7) # added the sleep to make sure that the sensors has setteled in
                 
                 self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
@@ -85,7 +84,7 @@ class MainController():
             self.consumerThread.run()
             
 
-    def powerSensorsOn(self, sensorList, pinList):
+    def powerSensorsOn(self, sensorList):
         
         if(len(sensorList)) == 2:
             self.device1.on()
@@ -97,7 +96,7 @@ class MainController():
             self.device3.on()
             self.device4.on()
             
-    def powerSensorsOff(self, sensorList, pinList):
+    def powerSensorsOff(self, sensorList):
         
         if(len(sensorList)) == 2:
             self.device1.off()
