@@ -12,7 +12,7 @@ class MainController():
         self.Mode = SimpleMode
         self.active = False
         self.gripGroup = 1
-        self.Algorithm = None
+        self.Algorithm_controller = None
         self.sensor = sEMGSensor()
         
         self.device1 = gpiozero.OutputDevice(17)
@@ -44,7 +44,7 @@ class MainController():
 
                 #Create objects here etc
                 factory = SimpleFactory()
-                self.Algorithm = factory.create_mode()
+                self.Algorithm_controller = factory.create_mode()
                 self.channelList = factory.create_channels()
                 self.queueList = factory.create_queues()
                 self.powerSensorsOn(self.channelList,)
@@ -53,9 +53,9 @@ class MainController():
                 self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
                 self.producerThread.start()
                 
-                self.Algorithm.Baseline(self.queueList)
+                self.Algorithm_controller.Baseline(self.queueList)
 
-                self.consumerThread = Process(target=self.Algorithm.Analyse, args=[self.queueList, self.gripGroup]) 
+                self.consumerThread = Process(target=self.Algorithm_controller.Analyse, args=[self.queueList, self.gripGroup]) 
                             
             #Here we change the mode to advanced
             elif not self.Mode and self.active:
@@ -69,7 +69,7 @@ class MainController():
 
                 #Create objects here etc
                 factory = AdvancedFactory()
-                self.Algorithm = factory.create_mode()
+                self.Algorithm_controller = factory.create_mode()
                 self.channelList = factory.create_channels()
                 self.queueList = factory.create_queues()
                 self.powerSensorsOn(self.channelList, self.pinList)
@@ -77,7 +77,7 @@ class MainController():
                 self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
                 self.producerThread.start()
                             
-                self.consumerThread = Process(target=self.Algorithm.Analyse, args=[self.queueList])
+                self.consumerThread = Process(target=self.Algorithm_controller.Analyse, args=[self.queueList])
                 
                 
             #call the analyse etc.
