@@ -15,7 +15,7 @@ class SimpleController(IController):
     def Analyse(self, queueList):
         if self.firstRun:
             self.firstRun = False
-            self.algorithm.Baseline()
+            self.algorithm.Baseline(queueList)
             
         result = self.algorithm.Analyse(queueList, self.gripGroup)
         self.motor.MoveHand(result)

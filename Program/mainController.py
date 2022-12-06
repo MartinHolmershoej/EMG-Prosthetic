@@ -53,8 +53,6 @@ class MainController():
                 self.producerThread = Process(target=self.sensor.getData, args=(self.channelList, self.queueList))
                 self.producerThread.start()
                 
-                self.Algorithm_controller.Baseline(self.queueList)
-
                 self.consumerThread = Process(target=self.Algorithm_controller.Analyse, args=[self.queueList]) 
                             
             #Here we change the mode to advanced

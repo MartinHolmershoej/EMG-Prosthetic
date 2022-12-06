@@ -8,9 +8,7 @@ class SimpleAlgorithm(Ialgorithm.ABC):
     def __init__(self) -> None:
         self.baseline_1 = 0.600
         self.baseline_2 = 0.600
-        self.result = 0
-        self.motor = MotorController()
-        
+        self.result = 0        
 
     def Analyse(self, queueList, gripGroup):
         queue1 = queueList[0]
@@ -43,8 +41,6 @@ class SimpleAlgorithm(Ialgorithm.ABC):
         else:
             self.result = 0
         
-        #Call the motorcontroller her
-        self.motor.MoveHand(self.result)
 
     def Baseline(self, queueList):
         value1 = 0
