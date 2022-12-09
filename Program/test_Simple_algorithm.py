@@ -36,7 +36,7 @@ class TestSimpleAlgorithm(unittest.TestCase):
         simple = simple_algorithm.SimpleAlgorithm()
         QList = self.fillQueueForBaseline()
         simple.Baseline(QList)
-        self.assertEqual((simple.baseline_1, simple.baseline_2), (1.17, 0.9))
+        self.assertEqual((simple.baseline_1, simple.baseline_2), (2.34, 1.8))
 
 
     def test_Analyse_Upper_gripGroup_1(self):
@@ -63,21 +63,21 @@ class TestSimpleAlgorithm(unittest.TestCase):
     def test_Analyse_Lower_gripGroup_1(self):
         gripGroup = 1
         simple = simple_algorithm.SimpleAlgorithm()
-        QList = self.fillQueueForAnalyse(1, 1)
+        QList = self.fillQueueForAnalyse(0.500,1)
         simple.Analyse(QList, gripGroup)
         self.assertEqual(simple.result, 2)
     
     def test_Analyse_Lower_gripGroup_2(self):
         gripGroup = 2
         simple = simple_algorithm.SimpleAlgorithm()
-        QList = self.fillQueueForAnalyse(1, 1)
+        QList = self.fillQueueForAnalyse(0.500,1)
         simple.Analyse(QList, gripGroup)
         self.assertEqual(simple.result, 4)
     
     def test_Analyse_Lower_gripGroup_3(self):
         gripGroup = 3
         simple = simple_algorithm.SimpleAlgorithm()
-        QList = self.fillQueueForAnalyse(1, 1)
+        QList = self.fillQueueForAnalyse(0.500,1)
         simple.Analyse(QList, gripGroup)
         self.assertEqual(simple.result, 6)
 
