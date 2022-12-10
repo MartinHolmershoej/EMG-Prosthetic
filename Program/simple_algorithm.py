@@ -3,7 +3,7 @@ import Ialgorithm
 
 
 
-class SimpleAlgorithm(Ialgorithm.ABC):
+class SimpleAlgorithm():
     
     def __init__(self) -> None:
         self.baseline_1 = 0.600

@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from joblib import load
 
-class AdvancedAlgorithm(Ialgorithm.ABC):
+class AdvancedAlgorithm():
 
     def __init__(self) -> None:
         self.eMGList = []
