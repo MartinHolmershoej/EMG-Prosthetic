@@ -1,5 +1,4 @@
 from multiprocessing import Queue
-import Ialgorithm
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from joblib import load
