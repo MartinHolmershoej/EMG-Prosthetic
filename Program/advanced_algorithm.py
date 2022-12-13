@@ -58,7 +58,7 @@ class AdvancedAlgorithm():
                 self.eMGList.append(queue4Value)
                 
     def Analyse(self):
-        clf = load(r"C:\Users\Vinni\OneDrive\Dokumenter\GitHub\EMG-Prosthetic\Program\RF_Minimalized.joblib")
+        clf = load(r"/home/pi/Documents/EMG-Prosthetic/Program/RF_Minimalized.joblib")
         self.prediction = clf.predict(np.asarray(self.eMGList).reshape(1,-1))
 
         return self.prediction
