@@ -1,6 +1,3 @@
-from motorController import MotorController
-
-
 
 class SimpleAlgorithm():
     
@@ -39,6 +36,8 @@ class SimpleAlgorithm():
             
         else:
             self.result = 0
+        
+        return self.result
         
 
     def Baseline(self, queueList):
