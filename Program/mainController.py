@@ -1,5 +1,6 @@
 from simple_factory import SimpleFactory
 from advanced_factory import AdvancedFactory
+from motorController import MotorController
 from s_EMG_Sensor import sEMGSensor
 from threading import Thread
 from multiprocessing import Process
@@ -20,6 +21,7 @@ class MainController():
         self.device3 = gpiozero.OutputDevice(22)
         self.device4 = gpiozero.OutputDevice(10)
 
+        self.motor = MotorController()
         
         self.channelList = []
         self.queueList =[]
@@ -44,7 +46,7 @@ class MainController():
 
                 #Create objects here etc
                 factory = SimpleFactory()
-                self.Algorithm_controller = factory.create_mode()
+                self.Algorithm_controller = factory.create_mode(self.motor)
                 self.channelList = factory.create_channels()
                 self.queueList = factory.create_queues()
                 self.powerSensorsOn(self.channelList,)
@@ -67,7 +69,7 @@ class MainController():
 
                 #Create objects here etc
                 factory = AdvancedFactory()
-                self.Algorithm_controller = factory.create_mode()
+                self.Algorithm_controller = factory.create_mode(self.motor)
                 self.channelList = factory.create_channels()
                 self.queueList = factory.create_queues()
                 self.powerSensorsOn(self.channelList)

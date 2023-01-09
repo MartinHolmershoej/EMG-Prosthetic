@@ -8,8 +8,8 @@ class AdvancedFactory(AbstractFactory):
         self.manySensors = ManySensors()
         
     #Overwrites the abstract method, to create advanced mode
-    def create_mode(self):
-        return AdvancedMode()
+    def create_mode(self, motor):
+        return AdvancedMode(motor)
 
     #Overwrites the abstract method, to create many sensors
     def create_channels(self):

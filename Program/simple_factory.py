@@ -10,8 +10,8 @@ class SimpleFactory(AbstractFactory):
         
     
     #Overwrites the abstract method, to create the simple mode
-    def create_mode(self):
-        return SimpleMode()
+    def create_mode(self, motor):
+        return SimpleMode(motor)
 
     #Overwrites the abstract method, to create few sensors
     def create_channels(self):

@@ -5,9 +5,9 @@ from motorController import MotorController
 
 class SimpleMode(IController):
     
-    def __init__(self) -> None:
+    def __init__(self, motor) -> None:
         self.algorithm = SimpleAlgorithm()
-        self.motor = MotorController()
+        self.motor = motor
         self.firstRun = True
         self.gripGroup = 1
         

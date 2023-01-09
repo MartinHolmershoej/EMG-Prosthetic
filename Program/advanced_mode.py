@@ -5,11 +5,11 @@ from advanced_algorithm import AdvancedAlgorithm
 
 class AdvancedMode(IController):
     
-    def __init__(self) -> None:
-        self.motor = MotorController()
+    def __init__(self, motor) -> None:
+        self.motor = motor
         self.algorithm = AdvancedAlgorithm()
     
-    def Analyse(self, queueList, eMGList):
-        self.algorithm.AddToEMGList(queueList, eMGList)
+    def Analyse(self, queueList):
+        self.algorithm.AddToEMGList(queueList)
         result = self.algorithm.Analyse()
         self.motor.MoveHand(result)
